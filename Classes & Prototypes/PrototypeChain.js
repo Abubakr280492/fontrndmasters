@@ -26,4 +26,6 @@ const user2 = userCreator("Eva",9);
 
 user1.increment() // impliset paramert "this" we get assight to "user 1"
 
-console.log("hello");
+
+
+// console.log("hello"); //node PrototypeChain.js
