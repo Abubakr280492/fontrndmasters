@@ -23,6 +23,9 @@ const generatedFunc = functionCreator()  //new execution context  were saved in 
 
 const result = generatedFunc(2) //5   result = generateFunc's name is add3
 
+
+
+
 const add3 = x => x+3
 const div5 = x => x/5
 
