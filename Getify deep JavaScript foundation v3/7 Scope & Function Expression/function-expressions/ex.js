@@ -1,38 +1,5 @@
 
 
-
-function getIdsStud(studentId){
-	return studentRecords.find(function matchId(record){
-		return (record.id==studentId)
-	});
-
-}
-
-
-function printRecords(recordIds) {
-	 var rec= recordIds.map(getIdsStud)
-
-	 rec.sort(function ascendingOrder(name1, name2){
-		 if(name1 < name2) return -1;
-		 else if (name1 > name2) return 1;
-		 else return 0;
-	 })
-	 records.forEach(function printRecord())
-
-}
-
-function paidStudentsToEnroll() {
-	// TODO
-
-}
-
-function remindUnpaid(recordIds) {
-	// TODO
-}
-
-
-// ********************************
-
 var currentEnrollment = [ 410, 105, 664, 375 ];
 
 var studentRecords = [
@@ -53,6 +20,60 @@ currentEnrollment = paidStudentsToEnroll();
 printRecords(currentEnrollment);
 console.log("----");
 remindUnpaid(currentEnrollment);
+
+
+function getStudentById(studentId){
+	return studentRecords.find(function matchId(record){
+		return (record.id==studentId)
+	});
+}
+
+// var getIdsStud = studentId => 
+// 	studentRecords.find(
+// 		record.id == studentId
+// 	);
+
+
+
+function printRecords(recordIds) {
+	 var records= recordIds.map(getStudentById)
+
+	 rec.sort(function sortByNameAsc(record1, record2){
+		 if(record1.name < record2.name) return -1;
+		 else if (record1.name > record2.name) return  1;
+		 else return 0;
+	 });
+
+	 records.forEach(function printRecord(recoerd){
+		 console.log(`${record.name} (${record.id}): ${record.paid ? "Paid": "Not Paid"}`);
+	 });
+
+}
+
+
+function paidStudentsToEnroll() {
+	var idsToEnroll = studentRecords.filter(function needToEnroll(record){
+		return (record.paid && !currentEnrollment.includes(record.id));
+	})
+		
+		
+		.map(function getStudentId(record){
+			return record.id;
+	})
+
+	return [ ...currentEnrollment, ...idsToEnroll];
+}
+
+function remindUnpaid(recordIds) {
+	var unpaidIds = recordIds.filter(function isUnpaid(studentId){
+		var record = getStudentById(studentId);
+		 return !record.paid;
+	});
+	printRecords(unpaidIds);
+}
+
+
+// ********************************
 
 /*
 	Bob (664): Not Paid
